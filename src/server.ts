@@ -1,23 +1,16 @@
 import express from "express";
-import exampleRoutes from "./routes/example-routes";
+import exampleRoutes from "./routes/example/example-routes";
+import authRoutes from "./routes/login/auth-routes";
 
 const app = express();
 const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
-const router = express.Router();
-
 app.use(express.json());
 app.use(express.urlencoded());
 
-router.get("/", (req, res) => {
-  res.send("Welcome to the Webhook Server!");
-});
+app.use("/ping", exampleRoutes);
+app.use("/auth", authRoutes);
 
-router.get("/example", exampleRoutes);
-
-app.use(router);
-
-
-app.listen(PORT, "0.0.0.0" , () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server is running on port ${PORT}`);
 });
