@@ -2,7 +2,7 @@ import express from "express";
 import exampleRoutes from "./routes/example-routes";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT ? parseInt(process.env.PORT, 10) : 3000;
 
 const router = express.Router();
 
@@ -17,6 +17,7 @@ router.get("/example", exampleRoutes);
 
 app.use(router);
 
-app.listen(PORT, () => {
+
+app.listen(PORT, "0.0.0.0" , () => {
   console.log(`Server is running on port ${PORT}`);
 });
